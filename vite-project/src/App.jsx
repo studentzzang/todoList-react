@@ -10,6 +10,24 @@ export default class App extends Component{
       textDecoration : "none"
     };
   }
+
+  todoData = [
+    {
+      id: 1,
+      title : "공부하기",
+      isDone : true,
+    },
+    {
+      id : 2,
+      title : "옵치하기",
+      isDone : false,
+    }
+  ]
+
+  deleteTodo = (id) => {
+    let todo = this.todoData.filter(data => data.id !== id);
+    console.log(todo);
+  }
   
   render() {
 
@@ -20,12 +38,15 @@ export default class App extends Component{
             <h2>할 일 목록</h2>
           </div>
         
-          <div style={this.bottomBorder()}>
-            <input type="checkbox" defaultChecked={false}></input>
-            코딩하기
-            <button className="cancelBox">X</button>
+        {this.todoData.map((data) => (
+          <div style={this.bottomBorder()} key={data.id}>
+            
+            <input type="checkbox" defaultChecked={data.isDone}></input>
+              {data.title}
+            <button className="cancelBox" onClick={this.deleteTodo(data.id)}>X</button>
 
           </div>
+        ))}
         </div>
 
       </div>
