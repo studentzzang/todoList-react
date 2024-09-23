@@ -11,18 +11,22 @@ export default class App extends Component{
     };
   }
 
-  todoData = [
-    {
-      id: 1,
-      title : "공부하기",
-      isDone : true,
-    },
-    {
-      id : 2,
-      title : "옵치하기",
-      isDone : false,
-    }
-  ]
+  state = {
+    todoData: [
+      
+      {
+        id: 1,
+        title : "공부하기",
+        isDone : true,
+      },
+      {
+        id : 2,
+        title : "옵치하기",
+        isDone : false,
+      }
+    ],
+    value: ""
+  }
 
   deleteTodo = (id) => {
     let todo = this.todoData.filter(data => data.id !== id);
