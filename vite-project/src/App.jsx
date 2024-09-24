@@ -26,9 +26,26 @@ export default class App extends Component{
       }
     ],
     value: ""
-  }
+  };
 
-  addTodo = () => {
+  handleChange = (e) => { //할일 추가 form 변경될 때
+    console.log(e.target.value);
+    this.setState({value : e.target.value})
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    let newTodoData = {
+      id: Date.now(),
+      title : this.state.value,
+      completed : false,
+    };
+
+    console.log(newTodoData.id);
+
+    // 원래있던 투두에 할일 더해주기 (전개연산자)
+    this.setState({todoData : [...this.state.todoData, newTodoData]})
 
   }
 
@@ -48,22 +65,23 @@ export default class App extends Component{
             <h2>할 일 목록</h2>
           </div>
 
-          <form style = {{display : 'flex'}}>
+          <form style = {{display : 'flex'}} onSubmit={this.handleSubmit}>
 
-          <input 
-            type="text" 
-            name="value"
-            style = {{flex: '10', padding : '5px'}}
-            placeholder="할 일을 입력하세요."
-            value=""
-          />
+            <input 
+              type="text" 
+              name="value"
+              style = {{flex: '10', padding : '5px'}}
+              placeholder="할 일을 입력하세요."
+              value = {this.state.value}
+              onChange={this.handleChange}
+            />
 
-          <input
-            type="submit" 
-            value="입력"
-            className="submitBtn" 
-            style = {{flex:1}}  
-          />
+            <input
+              type="submit" 
+              value="입력"
+              className="submitBtn" 
+              style = {{flex:1}}  
+            />
           </form>
         
         {this.state.todoData.map((data) => (
