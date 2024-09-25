@@ -13,7 +13,8 @@ export default class App extends Component{
 
   state = { todoData: [
   ], 
-    value: ""};
+    value: ""
+  };
 
   handleChange = (e) => { //할일 추가 form 변경될 때
     this.setState({value : e.target.value})
@@ -36,7 +37,7 @@ export default class App extends Component{
   handleCompleted = (id) => {
     let newTodoData = this.state.todoData.map((data) => {
       if (data.id === id) {
-        data.completed = data.completed;
+        data.completed = !data.completed;
       }
 
       return data;
@@ -84,10 +85,10 @@ export default class App extends Component{
             
             <input 
               type="checkbox"
-              defaultChecked={data.completed}>
-              onChange = {() => this.handleChange(data.id)}
-            </input>
-              {data.title}
+              defaultChecked={data.completed}
+              onChange = {() => this.handleCompleted(data.id)}
+            />
+            {data.title}
             <button className="cancelBox" onClick={() => this.deleteTodo(data.id)}>X</button>
 
           </div>
