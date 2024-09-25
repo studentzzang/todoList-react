@@ -3,33 +3,19 @@ import './style.css'
 
 export default class App extends Component{
 
-  bottomBorder = () => {
+  bottomBorder = (completed) => {
     return {
       padding : "10px",
       borderBottom : "1px #ccc dotted",
-      textDecoration : "none"
+      textDecoration : completed ? "line-through" : "none",
     };
   }
 
-  state = {
-    todoData: [
-      
-      {
-        id: 1,
-        title : "공부하기",
-        isDone : true,
-      },
-      {
-        id : 2,
-        title : "옵치하기",
-        isDone : false,
-      }
-    ],
-    value: ""
-  };
+  state = { todoData: [
+  ], 
+    value: ""};
 
   handleChange = (e) => { //할일 추가 form 변경될 때
-    console.log(e.target.value);
     this.setState({value : e.target.value})
   };
 
@@ -41,13 +27,22 @@ export default class App extends Component{
       title : this.state.value,
       completed : false,
     };
-
-    console.log(newTodoData.id);
-
+  
     // 원래있던 투두에 할일 더해주기 (전개연산자)
-    this.setState({todoData : [...this.state.todoData, newTodoData]})
+    this.setState({todoData : [...this.state.todoData, newTodoData], value: ""})
 
   }
+
+  handleCompleted = (id) => {
+    let newTodoData = this.state.todoData.map((data) => {
+      if (data.id === id) {
+        data.completed = data.completed;
+      }
+
+      return data;
+    });
+    this.setState({todoData : newTodoData})
+  };
 
   deleteTodo = (id) => {
 
@@ -85,9 +80,13 @@ export default class App extends Component{
           </form>
         
         {this.state.todoData.map((data) => (
-          <div style={this.bottomBorder()} key={data.id}>
+          <div style={this.bottomBorder(data.completed)} key={data.id}>
             
-            <input type="checkbox" defaultChecked={data.isDone}></input>
+            <input 
+              type="checkbox"
+              defaultChecked={data.completed}>
+              onChange = {() => this.handleChange(data.id)}
+            </input>
               {data.title}
             <button className="cancelBox" onClick={() => this.deleteTodo(data.id)}>X</button>
 
