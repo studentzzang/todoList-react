@@ -1,12 +1,10 @@
-export default function Form(handleSubmit, value, setValue){
+export default function Form({handleSubmit, value, setValue}){
 
     const handleChange = (e) => { //할일 추가 form 변경될 때
         setValue(e.target.value);
     };
 
     return (
-
-        
         <form style = {{display : 'flex'}} onSubmit={handleSubmit}>
 
           <input 
