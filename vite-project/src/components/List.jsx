@@ -1,13 +1,4 @@
-
 export default function List({todoData, setTodoData}){
-
-    const bottomBorder = (completed) => {
-        return {
-            padding : "10px",
-            borderBottom : "1px #ccc dotted",
-            textDecoration : completed ? "line-through" : "none",
-        };
-    };
 
     const handleCompleted = (id) => {
         let newTodoData = todoData.map((data) => {
@@ -30,15 +21,17 @@ export default function List({todoData, setTodoData}){
     return (
         <div>
             {todoData.map((data) => (
-                <div style={bottomBorder(data.completed)} key={data.id}>
-                <input 
-                    type="checkbox"
-                    defaultChecked={data.completed}
-                    onChange = {() => handleCompleted(data.id)}
-                />
-                {data.title}
-                <button className="cancelBox" onClick={() => deleteTodo(data.id)}>X</button>
-
+                <div key={data.id}>
+                    <div className="flex items-center justifi-between w-full px-4 py-1 my-2
+                    text-slate-200 bg-slate-400 border rounded">
+                        <input 
+                            type="checkbox"
+                            defaultChecked={data.completed}
+                            onChange = {() => handleCompleted(data.id)}
+                        />
+                        {data.title}
+                        <button onClick={() => deleteTodo(data.id)}>X</button>
+                    </div>
                 </div>
             ))}
         </div>

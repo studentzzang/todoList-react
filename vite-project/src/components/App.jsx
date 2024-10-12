@@ -1,4 +1,4 @@
-import './style.css'
+import './App.css'
 import {useState} from "react";
 import List from './List.jsx';
 import Form from './Form.jsx'
@@ -26,9 +26,9 @@ export default function App(){
   }
 
   return (
-    <div className="container">
-      <div className="todoBlock">
-        <div className="title">
+    <div className="flex items-center justify-center w-screen h-screen bg-purple-200">
+      <div className="w-full p-5 m-4 text-purple-950 borde bg-white rounded shadow">
+        <div>
           <h2>할 일 목록</h2>
         </div>
 
