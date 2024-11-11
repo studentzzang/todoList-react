@@ -14,20 +14,20 @@ export default function App(){
     e.preventDefault();
 
     let newTodo = {
-        id: Date.now(),
-        title : value,
-        completed : false,
+      id: Date.now(),
+      title : value,
+      completed : false,
     };
   
     setTodoData(prev => [...prev, newTodo]);
 
-    setValue(""); //이건뭐지
+    setValue(""); //form의 값 지우기
 
   }
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-purple-200">
-      <div className="w-full p-5 m-4 text-purple-950 borde bg-white rounded shadow">
+      <div className="w-full p-5 m-4 text-purple-950 border bg-white rounded shadow">
         <div>
           <h2>할 일 목록</h2>
         </div>
